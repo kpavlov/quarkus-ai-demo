@@ -1,5 +1,0 @@
-quarkus:
-  langchain4j:
-    openai:
-      base-url: http://localhost:8089/v1/ #local development
-      api-key: "sk_dummy"

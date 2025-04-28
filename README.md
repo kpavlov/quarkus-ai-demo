@@ -1,26 +1,14 @@
 # Quarkus LC4J Demo
 
 ## Prerequisites
-
-### 1. Install needed tools
-
-```shell
-brew install ollama jq
-```
-
-### 2. Start Ollama LLM with DeepSeek R1
-
-Start Ollama server
-
-```shell
-ollama start
-```
-
-Install DeepSeek model:
-
-```shell
-ollama pull deepseek-r1 && ollama list
-```
+       
+1. JDK 21
+2. Docker Compose environment (Docker or OrbStack)
+3. Maven
+4. Get OpenAI API Key and setup `.env` file like this:
+    ```dotenv
+    OPENAI_API_KEY=sk-proj-xxxx
+    ```
 
 ### Observability
 
@@ -30,6 +18,18 @@ ollama pull deepseek-r1 && ollama list
 docker run -p 3000:3000 -p 4317:4317 -p 4318:4318 --rm -ti grafana/otel-lgtm
 ```
 **TODO:** show dashboard with [gen_ai.*](https://opentelemetry.io/docs/specs/semconv/gen-ai/) metrics.
+          
+## Build project and run tests
+
+```shell
+mvn verify
+```
+
+## Run with Docker Compose
+
+```shell
+docker compose start
+```
 
 ## Demo 1: ChatModelResource
 
@@ -61,12 +61,9 @@ curl -X POST http://localhost:8080/lc4j/suspend \
 
 1. Run [LlmSimulator.kt](ai-server/src/test/kotlin/LlmSimulator.kt) - Starts MockOpenai on port 8089
 
-2. [application-dev.yaml](ai-server/src/main/resources/application-dev.yaml) has OpenAI test URL
-```yaml
-quarkus:
-  langchain4j:
-    openai:
-      base-url: http://localhost:8089/v1/ #local development
+2. [application-dev.yaml](ai-server/src/main/resources/application-dev.properties) has OpenAI test URL
+```properties
+quarkus.langchain4j.openai.base-url=http://localhost:8089/v1/
       api-key: "sk_dummy"
 ```
 

@@ -2,66 +2,19 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.example.quarcus-ai</groupId>
+  <parent>
+    <groupId>org.acme.quarcus-ai</groupId>
+    <artifactId>quarkus-ai-demo</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
   <artifactId>ai-server</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <name>ai-server</name>
-
-  <properties>
-    <kotlin.version>2.1.20</kotlin.version>
-    <quarkus.version>3.21.3</quarkus.version>
-    <java.version>21</java.version>
-    <maven.compiler.release>${java.version}</maven.compiler.release>
-    <kotlin.compiler.languageVersion>2.1</kotlin.compiler.languageVersion>
-    <kotlin.compiler.javaParameters>true</kotlin.compiler.javaParameters>
-    <kotlin.compiler.jvmTarget>${java.version}</kotlin.compiler.jvmTarget>
-    <lc4j.version>1.0.0-Beta1</lc4j.version>
-    <ai-mocks.version>0.3.3</ai-mocks.version>
-  </properties>
-
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>org.jetbrains.kotlin</groupId>
-        <artifactId>kotlin-bom</artifactId>
-        <version>${kotlin.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-      <dependency>
-        <groupId>io.quarkus</groupId>
-        <artifactId>quarkus-bom</artifactId>
-        <version>${quarkus.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-      <dependency>
-        <groupId>dev.langchain4j</groupId>
-        <artifactId>langchain4j-bom</artifactId>
-        <version>${lc4j.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
+  <packaging>jar</packaging>
 
   <dependencies>
     <dependency>
       <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-config-yaml</artifactId>
-      <scope>runtime</scope>
-    </dependency>
-    <dependency>
-      <groupId>io.quarkus</groupId>
       <artifactId>quarkus-rest-kotlin-serialization</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-opentelemetry</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>dev.langchain4j</groupId>
-      <artifactId>langchain4j-ollama</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
@@ -70,7 +23,7 @@
     <dependency>
       <groupId>io.quarkiverse.langchain4j</groupId>
       <artifactId>quarkus-langchain4j-openai</artifactId>
-      <version>0.25.0</version>
+      <version>${quarkusverse.version}</version>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
@@ -80,48 +33,50 @@
     <dependency>
       <groupId>dev.langchain4j</groupId>
       <artifactId>langchain4j-open-ai</artifactId>
+      <version>${lc4j.version}</version>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>me.kpavlov.aimocks</groupId>
       <artifactId>ai-mocks-openai-jvm</artifactId>
-      <version>0.1.5</version>
+      <version>${ai-mocks.version}</version>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-junit5</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkiverse.langchain4j</groupId>
+      <artifactId>quarkus-langchain4j-testing-scorer-junit5</artifactId>
+      <version>0.26.1</version>
     </dependency>
 
   </dependencies>
   <build>
-    <sourceDirectory>src/main/kotlin</sourceDirectory>
-    <testSourceDirectory>src/test/kotlin</testSourceDirectory>
     <plugins>
       <plugin>
         <artifactId>kotlin-maven-plugin</artifactId>
         <groupId>org.jetbrains.kotlin</groupId>
         <version>${kotlin.version}</version>
         <extensions>true</extensions>
-        <configuration>
-          <compilerPlugins>
-            <plugin>kotlinx-serialization</plugin>
-          </compilerPlugins>
-          <args>
-            <arg>-Xjvm-default=all</arg>
-          </args>
-        </configuration>
-        <dependencies>
-          <dependency>
-            <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-maven-serialization</artifactId>
-            <version>${kotlin.version}</version>
-          </dependency>
-        </dependencies>
       </plugin>
       <plugin>
         <groupId>io.quarkus.platform</groupId>
         <artifactId>quarkus-maven-plugin</artifactId>
-        <version>${quarkus.version}</version>
+        <extensions>true</extensions>
         <executions>
           <execution>
             <goals>
               <goal>build</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>build-image</id>
+            <phase>package</phase>
+            <goals>
+              <goal>image-build</goal>
             </goals>
           </execution>
         </executions>
