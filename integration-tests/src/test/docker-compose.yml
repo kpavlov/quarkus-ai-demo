@@ -9,4 +9,7 @@ services:
       QUARKUS_PROFILE: test
     depends_on:
       - weather-service
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
 
