@@ -10,7 +10,6 @@ class DockerCompose(openaiPort: Int) {
         File("src/test/docker-compose.yml")
     )
         .withEnv("QUARKUS_LANGCHAIN4J_OPENAI_API_BASE_URL", " http://host.docker.internal:$openaiPort/v1")
-//        .withEnv("OPENAI_BASE_URL", openaiBaseUrl)
         .withExposedService("weather-service", 8080)
         .withExposedService("ai-service", 8080)
         .withLocalCompose(true)

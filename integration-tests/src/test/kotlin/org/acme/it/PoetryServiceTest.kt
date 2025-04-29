@@ -1,6 +1,5 @@
 package org.acme.it
 
-import io.kotest.matchers.string.shouldContainIgnoringCase
 import io.kotest.matchers.string.shouldHaveLineCount
 import io.kotest.matchers.string.shouldStartWith
 import io.restassured.RestAssured
