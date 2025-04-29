@@ -7,6 +7,8 @@ services:
     image: acme/ai-server:latest
     environment:
       QUARKUS_PROFILE: test
+      #todo: does not work QUARKUS_LANGCHAIN4J_OPENAI_API_KEY: "test-openai-key"
+      #todo: does not work QUARKUS_LANGCHAIN4J_OPENAI_API_BASE_URL: "http://host.docker.internal:8089/v1"
     depends_on:
       - weather-service
     extra_hosts:

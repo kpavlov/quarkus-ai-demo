@@ -9,7 +9,11 @@ class DockerCompose(openaiPort: Int) {
     private var environment: ComposeContainer = ComposeContainer(
         File("src/test/docker-compose.yml")
     )
-        .withEnv("QUARKUS_LANGCHAIN4J_OPENAI_API_BASE_URL", " http://host.docker.internal:$openaiPort/v1")
+        .withEnv("QUARKUS_LANGCHAIN4J_OPENAI_API_KEY", "test-openai-key")
+        .withEnv(
+            "QUARKUS_LANGCHAIN4J_OPENAI_API_BASE_URL",
+            "http://host.docker.internal:$openaiPort/v1"
+        )
         .withExposedService("weather-service", 8080)
         .withExposedService("ai-service", 8080)
         .withLocalCompose(true)
@@ -27,6 +31,7 @@ class DockerCompose(openaiPort: Int) {
     }
 
     fun getWeatherServiceEndpoint() = getServiceEndpoint("weather-service");
+
     fun getAiServiceEndpoint() = getServiceEndpoint("ai-service");
 
     private fun getServiceEndpoint(serviceName: String) =
