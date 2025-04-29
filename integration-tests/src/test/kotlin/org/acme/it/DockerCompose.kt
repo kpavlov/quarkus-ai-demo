@@ -4,20 +4,23 @@ import org.testcontainers.containers.ComposeContainer
 import java.io.File
 
 
-object DockerCompose {
+class DockerCompose(openaiPort: Int) {
 
     private var environment: ComposeContainer = ComposeContainer(
         File("src/test/docker-compose.yml")
     )
+        .withEnv("QUARKUS_LANGCHAIN4J_OPENAI_API_BASE_URL", " http://host.docker.internal:$openaiPort/v1")
+//        .withEnv("OPENAI_BASE_URL", openaiBaseUrl)
         .withExposedService("weather-service", 8080)
         .withExposedService("ai-service", 8080)
         .withLocalCompose(true)
         .withLogConsumer("ai-service") {
-            println("🧠🐳: ${it.utf8String}")
+            print("🐳🧠: ${it.utf8String}")
         }
         .withLogConsumer("weather-service") {
-            println("🌧️️🐳: ${it.utf8String}")
+            print("🐳🌧️️: ${it.utf8String}")
         }
+
 
     fun start() {
         environment.start()

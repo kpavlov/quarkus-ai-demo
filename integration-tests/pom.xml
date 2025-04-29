@@ -46,6 +46,12 @@
       <artifactId>kotlin-extensions</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>me.kpavlov.aimocks</groupId>
+      <artifactId>ai-mocks-openai-jvm</artifactId>
+      <version>${ai-mocks.version}</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <build>
@@ -55,9 +61,17 @@
         <artifactId>maven-failsafe-plugin</artifactId>
         <configuration>
           <includes>
-            <include>**/*IT.kt</include>
+            <include>**/*IT*.kt</include>
           </includes>
         </configuration>
+        <executions>
+          <execution>
+            <phase>verify</phase>
+            <goals>
+              <goal>integration-test</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>

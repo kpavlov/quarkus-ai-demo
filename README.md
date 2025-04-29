@@ -5,7 +5,7 @@
 1. JDK 21
 2. Docker Compose environment (Docker or OrbStack)
 3. Maven
-4. Get OpenAI API Key and setup `.env` file like this:
+4. Get OpenAI API Key at https://platform.openai.com/account/api-keys and setup `.env` file like this:
     ```dotenv
     OPENAI_API_KEY=sk-proj-xxxx
     ```

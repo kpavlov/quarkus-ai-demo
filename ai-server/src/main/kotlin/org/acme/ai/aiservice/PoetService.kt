@@ -1,5 +1,6 @@
 package org.acme.ai.aiservice
 
+import dev.langchain4j.agent.tool.Tool
 import dev.langchain4j.service.SystemMessage
 import dev.langchain4j.service.UserMessage
 import dev.langchain4j.service.V
@@ -22,10 +23,12 @@ internal interface PoetService {
             Use all available tools provided to you to make content more interesting.
         """,
     )
+
     @Timeout(value = 7, unit = ChronoUnit.SECONDS)
     fun writeAPoem(
         @V("topic") topic: String,
         @V("lines") lines: Int,
+
     ): String
 
     @Suppress("unused")
