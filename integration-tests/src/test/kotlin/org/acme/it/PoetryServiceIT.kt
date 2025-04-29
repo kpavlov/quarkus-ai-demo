@@ -7,9 +7,9 @@ import io.restassured.http.ContentType
 import kotlinx.coroutines.test.runTest
 import org.acme.ai.aiservice.PoemRequest
 import org.acme.ai.aiservice.PoemResponse
-import org.junit.jupiter.api.Test
+import kotlin.test.Test
 
-internal class PoetryServiceTest {
+internal class PoetryServiceIT {
 
     val env = TestEnvironment
 

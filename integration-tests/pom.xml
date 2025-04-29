@@ -59,11 +59,6 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-failsafe-plugin</artifactId>
-        <configuration>
-          <includes>
-            <include>**/*IT*.kt</include>
-          </includes>
-        </configuration>
         <executions>
           <execution>
             <phase>verify</phase>

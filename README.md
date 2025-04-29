@@ -7,7 +7,7 @@
 3. Maven
 4. Get OpenAI API Key at https://platform.openai.com/account/api-keys and setup `.env` file like this:
     ```dotenv
-    OPENAI_API_KEY=sk-proj-xxxx
+    QUARKUS_LANGCHAIN4J_OPENAI_API_KEY=sk-proj-xxxx
     ```
 
 ### Observability
