@@ -1,5 +1,6 @@
 package org.acme.it
 
+import io.kotest.matchers.string.shouldEndWith
 import io.kotest.matchers.string.shouldHaveLineCount
 import io.kotest.matchers.string.shouldStartWith
 import io.restassured.RestAssured
@@ -18,17 +19,18 @@ internal class PoetryServiceIT {
         val aiServiceHost = env.dockerCompose.getAiServiceEndpoint()
         val request = PoemRequest(topic = "Mermaid", lines = 5)
 
-        env.openai.completion {
-            userMessageContains("Mermaid")
-        } responds {
-            assistantContent =
-                """
+        val llmReply = """
             In azure depths where mortal eyes see naught,
             A maiden fair with scales of emerald hue,
             Whose songs the raging tempests have oft fought,
             Doth yearn for realms where love might prove most true.
             Her siren call, both sweet and filled with rue.
             """.trimIndent()
+
+        env.openai.completion {
+            userMessageContains("Mermaid")
+        } responds {
+            assistantContent = llmReply
         }
 
         val poetResponse = RestAssured.given()
@@ -42,9 +44,12 @@ internal class PoetryServiceIT {
 
         println("Response: $poetResponse")
 
-        poetResponse.text.let {
-            it shouldHaveLineCount 5
+        val poem = poetResponse.text
+
+        poem.let {
+            it shouldHaveLineCount llmReply.lines().size + 1
             it shouldStartWith "In azure depths where mortal eyes see naught"
+            it shouldEndWith "©️ AI-Server, ${java.time.Year.now()}"
         }
     }
 }

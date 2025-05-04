@@ -1,10 +1,11 @@
+@file:Suppress("CdiManagedBeanInconsistencyInspection")
 package org.acme.ai.aiservice
 
-import dev.langchain4j.agent.tool.Tool
 import dev.langchain4j.service.SystemMessage
 import dev.langchain4j.service.UserMessage
 import dev.langchain4j.service.V
 import io.quarkiverse.langchain4j.RegisterAiService
+import jakarta.enterprise.context.ApplicationScoped
 import org.acme.ai.aiservice.tools.DynamicToolProviderSupplier
 import org.eclipse.microprofile.faulttolerance.Fallback
 import org.eclipse.microprofile.faulttolerance.Timeout
@@ -13,6 +14,7 @@ import java.time.temporal.ChronoUnit
 @RegisterAiService(
     toolProviderSupplier = DynamicToolProviderSupplier::class,
 )
+@ApplicationScoped
 internal interface PoetService {
 
     @Fallback(fallbackMethod = "fallback")
@@ -28,7 +30,6 @@ internal interface PoetService {
     fun writeAPoem(
         @V("topic") topic: String,
         @V("lines") lines: Int,
-
     ): String
 
     @Suppress("unused")
