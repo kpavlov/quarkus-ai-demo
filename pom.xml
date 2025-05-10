@@ -26,7 +26,7 @@
     <lc4j.version>1.0.0-beta3</lc4j.version>
     <quarkus.platform.version>3.22.2</quarkus.platform.version>
     <quarkus.version>3.22.2</quarkus.version>
-    <quarkusverse.version>0.27.0.CR1</quarkusverse.version>
+    <quarkusverse.version>0.27.0.CR2</quarkusverse.version>
     <kotest.version>5.9.1</kotest.version>
   </properties>
 
