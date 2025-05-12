@@ -5,7 +5,7 @@ import io.quarkiverse.mcp.server.ToolArg
 import io.quarkus.qute.Qute
 import org.eclipse.microprofile.rest.client.inject.RestClient
 
-class Weather {
+internal class Weather {
     @RestClient
     lateinit var weatherClient: WeatherClient
 

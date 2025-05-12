@@ -1,7 +1,7 @@
 import dev.langchain4j.data.message.SystemMessage.systemMessage
 import dev.langchain4j.data.message.UserMessage.userMessage
-import dev.langchain4j.model.chat.ChatLanguageModel
-import dev.langchain4j.model.chat.chat
+import dev.langchain4j.model.chat.ChatModel
+import dev.langchain4j.kotlin.model.chat.chat
 import dev.langchain4j.model.chat.request.ChatRequest
 import dev.langchain4j.model.openai.OpenAiChatModel
 import dev.langchain4j.model.openai.OpenAiChatRequestParameters
@@ -27,7 +27,7 @@ const val CONCURRENT_REQUESTS = 50
 
 private val mockOpenai = MockOpenai()
 
-private val model: ChatLanguageModel =
+private val model: ChatModel =
     OpenAiChatModel
         .builder()
         // .apiKey(System.getenv("OPENAI_API_KEY"))

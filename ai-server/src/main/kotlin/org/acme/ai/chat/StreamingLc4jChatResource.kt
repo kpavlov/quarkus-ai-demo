@@ -1,6 +1,6 @@
 package org.acme.ai.chat
 
-import dev.langchain4j.model.chat.ChatLanguageModel
+import dev.langchain4j.model.chat.ChatModel
 import dev.langchain4j.model.chat.response.StreamingChatResponseHandler
 import dev.langchain4j.model.language.LanguageModel
 import io.smallrye.mutiny.Multi
@@ -18,7 +18,7 @@ private val logger = Logger.getLogger(ChatModelResource::class.java)
 
 @Path("/lc4j/streaming")
 open class StreamingLc4jChatResource(
-    val model: ChatLanguageModel
+    val model: ChatModel
 ) {
         /*
     @POST

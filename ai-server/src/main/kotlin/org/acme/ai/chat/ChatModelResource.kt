@@ -2,8 +2,8 @@ package org.acme.ai.chat
 
 import dev.langchain4j.data.message.SystemMessage.systemMessage
 import dev.langchain4j.data.message.UserMessage.userMessage
-import dev.langchain4j.model.chat.ChatLanguageModel
-import dev.langchain4j.model.chat.chat
+import dev.langchain4j.kotlin.model.chat.chat
+import dev.langchain4j.model.chat.ChatModel
 import jakarta.ws.rs.Consumes
 import jakarta.ws.rs.POST
 import jakarta.ws.rs.Path
@@ -20,7 +20,7 @@ private val logger = Logger.getLogger(ChatModelResource::class.java)
  */
 @Path("/lc4j")
 open class ChatModelResource(
-    private val chatModel: ChatLanguageModel
+    private val chatModel: ChatModel
 ) {
     @Path("/blocking")
     @POST
