@@ -24,7 +24,7 @@
     <ai-mocks.version>0.3.5</ai-mocks.version>
     <kotlin.version>2.1.21</kotlin.version>
     <lc4j.version>1.0.0</lc4j.version>
-    <quarkus.platform.version>3.22.3</quarkus.platform.version>
+    <quarkus.platform.version>3.23.0</quarkus.platform.version>
     <quarkus.version>3.22.3</quarkus.version>
     <quarkusverse.version>0.27.0.CR2</quarkusverse.version>
     <kotest.version>5.9.1</kotest.version>
