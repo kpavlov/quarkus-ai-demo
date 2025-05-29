@@ -21,7 +21,7 @@
     <quarkus.container-image.tags>latest,dev</quarkus.container-image.tags>
 
     <!-- Dependency versions -->
-    <ai-mocks.version>0.3.5</ai-mocks.version>
+    <ai-mocks.version>0.4.2</ai-mocks.version>
     <kotlin.version>2.1.21</kotlin.version>
     <lc4j.version>1.0.0</lc4j.version>
     <quarkus.platform.version>3.22.3</quarkus.platform.version>
