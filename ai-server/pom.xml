@@ -82,7 +82,7 @@
     <dependency>
       <groupId>io.quarkiverse.langchain4j</groupId>
       <artifactId>quarkus-langchain4j-testing-scorer-junit5</artifactId>
-      <version>0.26.2</version>
+      <version>1.0.2</version>
     </dependency>
     <dependency>
       <groupId>io.rest-assured</groupId>
